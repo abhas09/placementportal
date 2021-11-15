@@ -207,3 +207,106 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model=Company
         fields='__all__'
+    
+class StudentdataExportbyplacementofficer(forms.Form):
+    enrollment_no=forms.BooleanField(required=False)
+    first_name=forms.BooleanField(required=False)
+    last_name=forms.BooleanField(required=False)
+    gender=forms.BooleanField(required=False)
+    Email=forms.BooleanField(required=False)
+    Mobile_No=forms.BooleanField(required=False)
+    Score10=forms.BooleanField(required=False)
+    Score12=forms.BooleanField(required=False)
+    JeePercentile=forms.BooleanField(required=False)
+    Branch=forms.BooleanField(required=False)
+    #mentor=forms.BooleanField(required=False)
+    PlacementCell=forms.BooleanField(required=False)
+    #AppliedPositions=models.ManyToManyField(to=Position,through='Applied')
+
+class PositionExportplacementofficer(forms.Form):
+    Company=models.ForeignKey(to=Company,on_delete=models.CASCADE)
+    minCTC=forms.BooleanField(required=False)
+    maxCTC=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    #branch=models.ManyToManyField(to=BranchDS,)
+    minScore10=forms.BooleanField(required=False)
+    minScore12=forms.BooleanField(required=False)
+    minJeePercentile=forms.BooleanField(required=False)
+
+class CompanyExportplacementofficer(forms.Form):    
+    Name=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    MCA=forms.BooleanField(required=False)
+    Type=forms.BooleanField(required=False)
+    revenue=forms.BooleanField(required=False)
+
+class AppliedExportplacementofficer(forms.Form):
+    Student=forms.BooleanField(required=False)
+    Position=forms.BooleanField(required=False)
+    Status=forms.BooleanField(required=False)
+    Time=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    FinalOffer=forms.BooleanField(required=False)
+
+class OffersExportplacementofficer(forms.Form):
+    Position=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    FinalCTC=forms.BooleanField(required=False)
+
+
+class MentorExportplacementofficer(forms.Form):
+    first_name=forms.BooleanField(required=False)
+    last_name=forms.BooleanField(required=False)
+    gender=forms.BooleanField(required=False)
+    Email=forms.BooleanField(required=False)
+    Mobile_No=forms.BooleanField(required=False)
+
+class StudentdataExportbycompany(forms.Form):
+    enrollment_no=forms.BooleanField(required=False)
+    first_name=forms.BooleanField(required=False)
+    last_name=forms.BooleanField(required=False)
+    gender=forms.BooleanField(required=False)
+    Email=forms.BooleanField(required=False)
+    Mobile_No=forms.BooleanField(required=False)
+    Score10=forms.BooleanField(required=False)
+    Score12=forms.BooleanField(required=False)
+    JeePercentile=forms.BooleanField(required=False)
+    Branch=forms.BooleanField(required=False)
+    #mentor=forms.BooleanField(required=False)
+    PlacementCell=forms.BooleanField(required=False)
+    #AppliedPositions=models.ManyToManyField(to=Position,through='Applied')
+   
+class AppliedExportcompany(forms.Form):
+    Student=forms.BooleanField(required=False)
+    Position=forms.BooleanField(required=False)
+    Status=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    FinalOffer=forms.BooleanField(required=False)
+
+class StudentdataExportbymentor(forms.Form):
+    enrollment_no=forms.BooleanField(required=False)
+    first_name=forms.BooleanField(required=False)
+    last_name=forms.BooleanField(required=False)
+    gender=forms.BooleanField(required=False)
+    Email=forms.BooleanField(required=False)
+    Mobile_No=forms.BooleanField(required=False)
+    School10=forms.BooleanField(required=False)
+    School12=forms.BooleanField(required=False)
+    Score10=forms.BooleanField(required=False)
+    Score12=forms.BooleanField(required=False)
+    JeePercentile=forms.BooleanField(required=False)
+    Branch=forms.BooleanField(required=False)
+    Aim=forms.BooleanField(required=False)
+    Objective=forms.BooleanField(required=False)
+    Mission=forms.BooleanField(required=False)
+    Vision=forms.BooleanField(required=False)
+    #mentor=forms.BooleanField(required=False)
+    PlacementCell=forms.BooleanField(required=False)
+    #AppliedPositions=models.ManyToManyField(to=Position,through='Applied')
+
+class AppliedExportmentor(forms.Form):
+    Student=forms.BooleanField(required=False)
+    Position=forms.BooleanField(required=False)
+    Status=forms.BooleanField(required=False)
+    Description=forms.BooleanField(required=False)
+    FinalOffer=forms.BooleanField(required=False)

@@ -72,4 +72,5 @@ urlpatterns = [
     path('Company/delete/<int:id>',views.DeleteCompany,name='DeleteCompany'),
     path('AssignMentor',views.AddStudentMentor),
     path('verifyStu',views.VerifyStudentView),
+    path('export/<int:f_id>/',views.exportview,name='cexport'),
 ]

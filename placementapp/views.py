@@ -778,44 +778,57 @@ def VerifyStudentView(request):
     return HttpResponse("<h1> Not Authorised</h1>")
 
 
-def export(request,headerrow):
+import csv
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def exportview(request,f_id):
+    if request.user.is_authenticated and request.user.verified:
+        if request.user.user_type==2:
+            d={1:StudentdataExportbyplacementofficer,2:PositionExportplacementofficer,3:AppliedExportplacementofficer,4:OffersExportplacementofficer,5:CompanyExportplacementofficer,6:MentorExportplacementofficer}
+        if request.user.user_type==3:
+            d={1:StudentdataExportbycompany,3:AppliedExportcompany}
+        if request.user.user_type==4:
+            d={1:StudentdataExportbymentor,3:AppliedExportmentor}
+        w1=[]
+        r=[]
+        if request.method=='POST':
+            form=d[f_id](request.POST)
+            if form.is_valid():
+                for fields in form:
+                    s=form.cleaned_data[fields.html_name]
+                    w1.append(fields.html_name)
+                    if s==True:
+                        r.append(fields.html_name)
+            form=d[f_id]()
+            return export(request,r,f_id)         
+        else:
+            form=d[f_id]()
+        return render(request,'placementapp/export.html',{'form':form})
+
+
+def export(request,headerrow,id):
     response = HttpResponse(content_type='text/csv')
     writer = csv.writer(response)
     writer.writerow(headerrow)
-    print(headerrow)
-    if "AppliedPosition" in headerrow:
-        headerrow.remove("AppliedPosition") 
-    for student in Student.objects.all().values(*headerrow):
+    m={1:Student,2:Position,3:Applied,4:Offers,5:Company,6:Mentor}
+    if id==1:
+        j={'School10':School,'School12':School,'Branch':BranchDS,'mentor':Mentor,'PlacementCell':PlacementCell} 
+    elif id==2:
+        j={'Company':Company}
+    elif id==3:
+        j={'Student':Student,'Position':Position,'FinalCTC': Offers}
+    elif id==4:
+        j={'Position':Position}
+    elif id==5 or id==6:
+        j={}
     
-        if "Branch" in headerrow:
-            bds=BranchDS.objects.get(pk=student['Branch'])
-            student['Branch']=str(bds)
+    for student in m[id].objects.all().values(*headerrow):
+        for k in j:
+            if k in headerrow:
+                bds=j[k].objects.get(pk=student[k])
+                student[k]=str(bds)
         writer.writerow(student.values())
     response['Content-Disposition'] = 'attachment; filename="students.csv"'
     return response
-
-
-def home_view(request):
-    w=['enrollment_no','first_name','last_name','gender','Email','Mobile_No','School10','School12','Score10','Score12','JeePercentile',
-      'Branch']
-    
-    w1=[]
-    r=[]
-    if request.method=='POST':
-        form=Export(request.POST)
-        if form.is_valid():
-            for fields in form:
-                s=form.cleaned_data[fields.html_name]
-                w1.append(fields.html_name)
-                print()
-                if s==True:
-                    r.append(fields.html_name)
-                
-        print(r)
-        
-        form=Export()
-        return export(request,r)         
-    else:
-        form=Export()
-    return render(request,'placementapp/export.html',{'form':form})
     
