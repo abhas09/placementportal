@@ -8,6 +8,7 @@ from django.forms import BaseModelFormSet
 #from .models import Student,Mentor,PlacementOfficer,Company,User
 from django.db import transaction
 from django.forms.utils import ValidationError
+from datetime import datetime
 
 class StudentSignUpForm(UserCreationForm):
     mobile_no=forms.IntegerField(max_value=9999999999,min_value=1111111111)
@@ -207,7 +208,25 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model=Company
         fields='__all__'
+<<<<<<< HEAD
     
+=======
+
+# class Export(forms.Form):
+#     enrollment_no=forms.BooleanField(required=False)
+#     first_name=forms.BooleanField(required=False)
+#     last_name=forms.BooleanField(required=False)
+#     gender=forms.BooleanField(required=False)
+#     Email=forms.BooleanField(required=False)
+#     Mobile_No=forms.BooleanField(required=False)
+#     School10=forms.BooleanField(required=False)
+#     School12=forms.BooleanField(required=False)
+#     Score10=forms.BooleanField(required=False)
+#     Score12=forms.BooleanField(required=False)
+#     JeePercentile=forms.BooleanField(required=False)
+#     Branch=forms.BooleanField(required=False)
+#forms.py
+>>>>>>> 753a06c2334b8e3647c0c655028f41ab8ba46e91
 class StudentdataExportbyplacementofficer(forms.Form):
     enrollment_no=forms.BooleanField(required=False)
     first_name=forms.BooleanField(required=False)
@@ -222,6 +241,10 @@ class StudentdataExportbyplacementofficer(forms.Form):
     #mentor=forms.BooleanField(required=False)
     PlacementCell=forms.BooleanField(required=False)
     #AppliedPositions=models.ManyToManyField(to=Position,through='Applied')
+<<<<<<< HEAD
+=======
+    branchlist=forms.ModelMultipleChoiceField(queryset=BranchDS.objects.all())
+>>>>>>> 753a06c2334b8e3647c0c655028f41ab8ba46e91
 
 class PositionExportplacementofficer(forms.Form):
     Company=models.ForeignKey(to=Company,on_delete=models.CASCADE)
@@ -247,13 +270,21 @@ class AppliedExportplacementofficer(forms.Form):
     Time=forms.BooleanField(required=False)
     Description=forms.BooleanField(required=False)
     FinalOffer=forms.BooleanField(required=False)
+<<<<<<< HEAD
+=======
+    From=forms.DateTimeField()
+    To=forms.DateTimeField(initial=datetime.now)
+>>>>>>> 753a06c2334b8e3647c0c655028f41ab8ba46e91
 
 class OffersExportplacementofficer(forms.Form):
     Position=forms.BooleanField(required=False)
     Description=forms.BooleanField(required=False)
     FinalCTC=forms.BooleanField(required=False)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 753a06c2334b8e3647c0c655028f41ab8ba46e91
 class MentorExportplacementofficer(forms.Form):
     first_name=forms.BooleanField(required=False)
     last_name=forms.BooleanField(required=False)
@@ -309,4 +340,8 @@ class AppliedExportmentor(forms.Form):
     Position=forms.BooleanField(required=False)
     Status=forms.BooleanField(required=False)
     Description=forms.BooleanField(required=False)
+<<<<<<< HEAD
     FinalOffer=forms.BooleanField(required=False)
+=======
+    FinalOffer=forms.BooleanField(required=False)
+>>>>>>> 753a06c2334b8e3647c0c655028f41ab8ba46e91
